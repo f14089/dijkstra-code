@@ -5,7 +5,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-typdef struct Path_Node
+#define V 9
+typedef struct Path_Node
 {
 	int seq; /*Giving a sequence number for each node.*/
 	int Node_value;
@@ -16,17 +17,24 @@ typdef struct Path_Node
 int main()
 {
 	/*Initialize*/
-	struct Path_Node source = NULL; 
-	struct Path_Node current = NULL;
-	struct Path_Node previous = NULL;
+	struct Path_Node *source = NULL; 
+	struct Path_Node *current = NULL;
+	struct Path_Node *previous = NULL;
 
 	int i=0;
-	while(1)
+	while(i!=7)
 	{
-	current=(struct *)malloc(sizeof(struct Path_Node));
-	current->seq = 0;
+	current=(struct Path_Node*)malloc(sizeof(struct Path_Node));
+	current->seq = i;
 	current->Node_value = 0;
+	current->adjacent_dist=i;
+	current->visited=0;
+	current->Nextnode = NULL;
 	if(source == NULL){source = current;}
+	else{
+	previous->Nextnode=current;}
+	i++;
+	previous=current;
 	}
 
 

@@ -47,6 +47,7 @@ int main()
 	current = source;
 	path_head = source;
 	temp_node=path_head;
+	
 	while(current != NULL){
 	if(current -> adjacent_dist == 0 && (current->seq+1)%9 != 1){
 current = current -> Nextnode;}
@@ -54,19 +55,22 @@ current = current -> Nextnode;}
 	temp_node -> next_path = current;
 	temp_node = current;
 	temp_node->next_path=NULL;
+	//if((temp_node -> seq +1)% 9 == 1){path_head -> next_vertex = current;path_head = current;path_head->next_vertex=NULL;}
 	current = current->Nextnode;}
-	if((temp_node -> seq +1)% 9 == 1){path_head -> next_vertex = current;path_head = current;path_head->next_vertex=NULL;}
+	
 	}
 	/*path_head = source;
-	current = path_head;
+	current = source;
 	i=0;
 	while(path_head!=NULL){
-	while(current != NULL){
-	if((current->seq)/9 == i){
-	previous = current;
-	current = current->next_path;
+	while((current->seq)/9 < 9 &&(current->next_path!=NULL) ){
+	if((current->seq)/9 == i ){
+	previous = current;}
+	else{
+	previous->next_path = current ->next_path;
+	free(current);}
+	current = previous->next_path;
 	}
-	previous->next_path = current->next_path;free(current);current = previous->next_path;}
 	i++;
 	path_head = path_head -> next_vertex;
 	current = path_head;
@@ -74,13 +78,16 @@ current = current -> Nextnode;}
 	
 	path_head=source;
 	current = source;
-	while(path_head!= NULL){
-	printf("%d ",current->adjacent_dist);
-	if(current->next_path == NULL){printf("\n");path_head=path_head->next_vertex;current = path_head;}
-	else{
-	current=current->next_path;}
-
+	temp_node = source;
+	while(current!= NULL){
+	if(((current->seq)/9)!=(temp_node->seq/9)){printf("\n");}
+	printf("%d ",current->seq);
+	//if(current->next_path == NULL){printf("\n");path_head=path_head->next_vertex;current = path_head;}
+	temp_node = current;
+	current=current->next_path;
+	
 	}
 
 
 }
+
